@@ -1,0 +1,9 @@
+= simple_form_for @project, url: team_projects_path(team_id: @team) do |f|
+  = f.input :name
+  = f.input :description
+  = f.label :project_type, class: "control-label"
+  = f.select :project_type, Project.project_type.options, {include_blank: true}, class: "form-control"
+  .div
+    = f.collection_check_boxes :user_ids, @team.users, :id, :name
+  = f.submit '提交', class: 'btn btn-primary'
+  = link_to '取消', team_projects_path(team_id: @team)

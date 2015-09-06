@@ -1,0 +1,8 @@
+.new_todo_form_wrapper
+  = simple_form_for [project, todo], remote: true do |f|
+    = f.input :name
+    = f.input :user_id, collection: project.team.users
+    = f.input :end_time, as: :date, html5: true
+    = hidden_field_tag 'todolist_id', todolist.id
+    = f.submit '新建任务', class: 'btn btn-primary'
+    = link_to '取消', '', class: 'disappear_new_todo_form'

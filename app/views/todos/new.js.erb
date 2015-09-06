@@ -1,0 +1,2 @@
+$(".todos_list_wrapper").append("<%= j render partial: 'shared/new_todo_form', locals: { todo: @todo, project: @project, todolist: @todolist } %>");
+$(".new_project_todo_<%= @todolist.id %>").hide();

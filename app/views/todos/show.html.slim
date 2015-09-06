@@ -1,0 +1,16 @@
+span = @todo.name
+- if @todo.username_and_endtime_is_nil?
+  span = @todo.no_appoint
+- else
+  span = @todo.user.name
+  span = @todo.end_time.try(:to_date)
+
+br
+  = render partial: 'comments/messages', locals: { messages: @todo.comments }
+br
+br
+- if @todo.deleted?
+  = link_to '恢复', restore_project_todo_path(project_id: @project.id, id: @todo.id)
+- else
+  = text_area_tag :content, nil, rows: "3", class: 'text_area form-control no-border offer-respond-messages'
+  = submit_tag '发表评论', class: 'btn btn-primary', id: 'form-comment_submit'

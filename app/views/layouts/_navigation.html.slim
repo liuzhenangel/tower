@@ -1,0 +1,35 @@
+nav.navbar.navbar-inverse
+  .container
+    .navigation_links
+      .navbar-header
+        button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        = link_to '', root_path, class: 'navbar-brand navbar-brand-logo'
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li class="dropdown"
+            a id="dLabel" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"
+              | #{@team.name}
+              span class="caret"
+            - teams = current_user.teams.where.not(id: @team.id)
+            ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+              - teams.each do |team|
+                li
+                  = link_to team.name, team_projects_path(team_id: team.id)
+              li
+                = link_to '创建/管理团队', root_path
+          li
+            = link_to '项目', team_projects_path(team_id: @team.id)
+          li
+            = link_to '动态', team_events_path(team_id: @team.id)
+        ul.nav.navbar-nav.navbar-right
+          li class="dropdown"
+            a id="dLabel" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"
+              | #{current_user.name}
+              span class="caret"
+            ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+              li
+                = link_to '退出', destroy_user_session_path, :method=>'delete'
