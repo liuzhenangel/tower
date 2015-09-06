@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
 
   def set_todo_and_project_and_team
     @todo = Todo.find(params[:todo_id])
-    @project = @todo.todolist.project
+    @project = Project.find(params[:project_id])
     @team = @project.team
   end
 end

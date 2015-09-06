@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :projects, only: :show do
     resources :todolists
     resources :todos do
+      resources :comments
       member do
         get :finish
         get :open

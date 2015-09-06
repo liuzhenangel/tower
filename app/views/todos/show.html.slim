@@ -12,5 +12,6 @@ br
 - if @todo.deleted?
   = link_to '恢复', restore_project_todo_path(project_id: @project.id, id: @todo.id)
 - else
-  = text_area_tag :content, nil, rows: "3", class: 'text_area form-control no-border offer-respond-messages'
-  = submit_tag '发表评论', class: 'btn btn-primary', id: 'form-comment_submit'
+  = simple_form_for [ @project, @todo, Comment.new ], remote: true do |f|
+    = f.text_area :content, id: 'editor', class: 'simditor', placeholder: '发表评论', autofocus: true
+    = f.submit '提交', class: 'btn btn-primary'

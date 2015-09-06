@@ -21,6 +21,8 @@ gem 'aasm'
 # soft destroy
 gem "paranoia", "~> 2.0"
 
+gem 'font-awesome-sass'
+gem 'simditor-rails'
 gem 'faker'
 gem 'factory_girl_rails'
 
