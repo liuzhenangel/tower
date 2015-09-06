@@ -3,4 +3,5 @@
 //= require simditor
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.appear
 //= require_tree .

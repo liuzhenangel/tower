@@ -60,10 +60,18 @@ class Todo < ActiveRecord::Base
                  resource_object: self)
   end
 
+  def end_time_previous
+    if end_time_was.blank?
+      '没有截止日期'
+    else
+      self.end_time_was.to_date
+    end
+  end
+
   private
   def before_update_todo_create_event
     if self.end_time != self.end_time_was
-      create_event("将任务完成时间从 #{self.end_time_was.to_date} 修改为 #{self.end_time.to_date}")
+      create_event("将任务完成时间从 #{end_time_previous} 修改为 #{self.end_time.to_date}")
     end
 
     if self.user_id != self.user_id_was && self.user_id_was.blank?

@@ -1,17 +1,37 @@
-span = @todo.name
-- if @todo.username_and_endtime_is_nil?
-  span = @todo.no_appoint
-- else
-  span = @todo.user.name
-  span = @todo.end_time.try(:to_date)
+.row
+  .col-md-1
+  .col-md-10
+    .todos_list_wrapper
+      .todolists
+        .todolist
+          p.todolist_name
+            = @todo.todolist.name
+          ul.todos.todos-uncompleted.ui-sortable
+            li.todo
+              .todo-wrap
+                span.todo-content
+                  = link_to @todo.name, project_todo_path(project_id: @project.id, id: @todo.id)
+                span.todo-detail
+                  = link_to project_todo_path(project_id: @project.id, id: @todo.id), class: "label todo-assign-due #{is_delay(@todo.end_time)}" do
+                    span.assignee
+                      = @todo.user.try(:name)
+                    span.due
+                      - if @todo.end_time.present?
+                        = @todo.end_time.to_date
 
-br
-  = render partial: 'comments/messages', locals: { messages: @todo.comments }
-br
-br
-- if @todo.deleted?
-  = link_to '恢复', restore_project_todo_path(project_id: @project.id, id: @todo.id)
-- else
-  = simple_form_for [ @project, @todo, Comment.new ], remote: true do |f|
-    = f.text_area :content, id: 'editor', class: 'simditor', placeholder: '发表评论', autofocus: true
-    = f.submit '提交', class: 'btn btn-primary'
+                  span.complate.label
+                    = link_to '完成', finish_project_todo_path(project_id: @project.id, id: @todo.id)
+                  span.edit.label
+                    = link_to '编辑', edit_project_todo_path(project_id: @project.id, id: @todo.id), remote: true
+                  span.destroy.label
+                    = link_to '删除', project_todo_path(project_id: @project.id, id: @todo.id), method: 'DELETE', data: {confirm: "确认删除这条任务 #{@todo.name} ?"}
+
+          = render partial: 'comments/messages', locals: { messages: @todo.comments, project: @project, object: @todo }
+          - if @todo.deleted?
+            = link_to '恢复', restore_project_todo_path(project_id: @project.id, id: @todo.id)
+          - else
+            = simple_form_for [ @project, @todo, Comment.new ], remote: true do |f|
+              = link_to edit_user_password_path, class: 'avatar-wrap' do
+                = image_tag current_user.logo_url, class: 'avatar img-circle'
+              = f.text_area :content, id: 'editor', class: 'simditor', autofocus: true
+              = f.submit '提交', class: 'btn btn-primary simditor_submit'

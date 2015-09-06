@@ -1,0 +1,114 @@
+.layout-user-img{
+  height: 24px;
+}
+
+.navbar.navbar-inverse {
+  background-color: #F2F5E9;
+  border-color: #F2F5E9;
+}
+
+.navbar-collapse-new {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: #F2F5E9;
+  color: #555;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+  background-color: #F2F5E9;
+  color: #555;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #999;
+  font-size: 16px;
+  line-height: 30px;
+  text-shadow: 1px 1px rgba(255,255,255,0.75);
+}
+
+.navbar-inverse .navbar-nav > li.actived > a {
+  color: #555;
+}
+
+.team_name {
+  color: #84a099;
+  font-weight: normal;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+body {
+  background-color: #F2F5E9;
+}
+
+.simple-stack .page{
+  width: 100%;
+  min-height: 600px;
+  border: 1px solid #dbdfd6;
+  box-shadow: 0 0 5px rgba(0,0,0,0.15);
+  background: #ffffff;
+  opacity: 1;
+  position: relative;
+  transform: none;
+  -webkit-transform: none;
+  transform-origin: 50% 0 0;
+  -webkit-transform-origin: 50% 0 0;
+}
+
+.footer {
+  width: 960px;
+  margin: 0 auto;
+  padding: 20px 0;
+  font-size: 12px;
+  color: #aaaaaa;
+  text-align: center;
+}
+
+.footer a {
+  color: #aaaaaa;
+}
+
+.team-menu {
+  a {
+    display: block;
+    padding: 5px 10px 5px 12px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  p.change_team_title {
+    position: relative;
+    margin: 5px;
+    font-size: 12px;
+    color: #999;
+    z-index: 1;
+  }
+
+  p.change_team_title::before {
+    content: '';
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+    border-top: 1px dotted #ddd;
+  }
+
+  li.part-line {
+    height: 1px;
+    width: 100%;
+    margin: 6px 0 5px;
+    border-top: 1px dotted #ddd;
+  }
+
+  .small a {
+    font-size: 12px;
+    color: #999;
+  }
+}
+

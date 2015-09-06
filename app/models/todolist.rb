@@ -13,5 +13,4 @@
 class Todolist < ActiveRecord::Base
   belongs_to :project
   has_many :todos, dependent: :destroy
-  validates :name, uniqueness: true
 end

@@ -4,7 +4,11 @@ class EventsController < ApplicationController
 
   def index
     #当前team下的所有events
-    @events = Event.where(team_id: @team.id).page(params[:page])
+    @events = Event.where(team_id: @team.id).page(params[:page]).per(8)
+  end
+
+  def load
+    @events = Event.where(team_id: @team.id).page(params[:page]).per(8)
   end
 
   private

@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.team = @team
+    @project.users = users_params
 
     if @project.save
       redirect_to project_path(id: @project)
@@ -31,6 +32,10 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:name, :description, :project_type)
+  end
+
+  def users_params
+    User.where(id: params[:project][:user_ids].push(current_user.id)) if params[:project][:user_ids].present?
   end
 
   def set_team

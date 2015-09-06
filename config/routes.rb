@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :projects, only: [:index, :new, :create]
-    resources :events, only: :index
+    resources :events, only: :index do
+      collection do
+        get :load
+      end
+    end
   end
 
   resources :projects, only: :show do

@@ -1,0 +1,6 @@
+$(".team-events-wrapper").append("<%= j render 'events_list' %>");
+$('#current_page').val(<%= @events.current_page%>);
+
+<% if @events.last_page? %>
+  $('#btn-load-more').text('没有更多内容了');
+<% end %>

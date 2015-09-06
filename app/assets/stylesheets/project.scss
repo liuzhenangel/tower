@@ -1,0 +1,99 @@
+.page {
+  .project_users {
+    margin-bottom: 20px;
+
+    label.user_ids {
+      margin-top: 15px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    span {
+      margin-left: 10px;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+#page-projects {
+  padding: 0;
+
+  a.project.c2.i2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+  }
+
+  .tools {
+    padding: 10px 30px 0;
+    min-height: 50px;
+
+    .link-create-project {
+      float: right;
+      line-height: 16px;
+      margin: 12px 10px;
+      font-size: 14px;
+      padding-right: 8px;
+      border-right: 1px solid #ddd;
+    }
+  }
+
+  .projects.grid-view {
+    margin: 0 30px 80px;
+
+
+    .project.c2 .badge {
+      background-color: #ece8d5;
+      color: #c8bfa5;
+      border-color: #c8bfa5;
+    }
+
+    .project {
+      &:hover {
+        background: #f9f9f9;
+        border: 1px solid #eaeaea;
+        text-decoration: none;
+      }
+
+      display: block;
+      width: 222px;
+      height: 150px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      float: left;
+      position: relative;
+
+      .badge {
+        display: block;
+        width: 60px;
+        height: 60px;
+        margin: 15px auto 20px;
+        text-align: center;
+        font-size: 56px;
+        font-style: normal;
+        background-color: transparent;
+        border-color: transparent;
+      }
+
+      .name {
+        display: block;
+        font-size: 17px;
+        color: #333333;
+        line-height: 20px;
+        text-align: center;
+        margin: 0 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .ui-sortable {
+    position: relative;
+  }
+}

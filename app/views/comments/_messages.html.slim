@@ -1,9 +1,11 @@
-.list-group.messages-group-wrapper
+.list-group.messages-group-wrapper.comment
   - messages.each do |message|
-    .list-group-item
-      .row
-        .col-md-2
-        .col-md-10
-          h4 = message.user.name
-          p = time_ago_in_words message.created_at
+    .comment-wrap
+      = link_to edit_user_password_path, class: 'avatar-wrap' do
+        = image_tag current_user.logo_url, class: 'avatar img-circle'
+      .comment-main
+        .info
+          = link_to message.user.name, edit_user_password_path, class: 'author'
+          = link_to message.created_at.to_date, project_todos_path(project_id: project.id, id: object.id), class: 'create-time'
+        .comment-content.editor-style
           p == message.content

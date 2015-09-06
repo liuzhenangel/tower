@@ -14,6 +14,10 @@ class Team < ActiveRecord::Base
   has_and_belongs_to_many :users
   after_create :after_create_team_create_event
 
+  def users_except_me
+    self.users.where.not(id: User.current.id)
+  end
+
   private
   def create_event(action)
     Event.create(user: User.current,

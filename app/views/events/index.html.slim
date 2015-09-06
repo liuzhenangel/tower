@@ -1,16 +1,5 @@
-.events_wrapper.container
-  table.table
-    tbody
-      - @events.each do |event|
-        tr
-          td = format_date event.created_at
-          td = link_to event.user.name
-          td #{event.action}:
-          td
-            - todo = Todo.with_deleted.find(event.resource_object_id)
-            - if event.resource_object_type == "Todo"
-              = link_to todo.name, project_todo_path(project_id: todo.todolist.project, id: todo.id), target: '_blank'
+.team-events
+  .team-events-wrapper
+    = render 'events_list'
 
-            - else
-              = link_to event.resource_object.name
-          td == event.content
+  = link_to '加载更多内容', '', id: 'btn-load-more'

@@ -19,7 +19,10 @@
 #  access_id              :integer
 #
 
+require 'carrierwave/orm/activerecord'
 class User < ActiveRecord::Base
+  mount_uploader :logo, LogoUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -37,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def self.current
-    Thread.current[:user]
+    Thread.current[:user] || User.first
   end
   def self.current=(user)
     Thread.current[:user] = user

@@ -1,10 +1,8 @@
-.projects_wrapper.container
-  .fr
-    = link_to '新建项目', new_team_project_path(team_id: @team.id)
-  - @projects.each_slice(4) do |project|
-    - project.each do |p|
-      .row
-        .col-md-3
-          = link_to p.name, project_path(id: p.id)
-
-
+.page-inner#page-projects
+  .tools
+    = link_to '新建项目', new_team_project_path(team_id: @team.id), class: 'link-create-project new'
+  .projects.grid-view.ui-sortable
+    - @projects.each do |project|
+      = link_to project_path(id: project.id), class: 'project c2 i2' do
+        span.badge.fa.fa-clock-o
+        span.name = project.name

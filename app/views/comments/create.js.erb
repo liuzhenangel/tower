@@ -1,2 +1,2 @@
-$(".messages-group-wrapper").replaceWith("<%= j render partial: 'messages', locals: { messages: @todo.comments } %>");
+$(".messages-group-wrapper").replaceWith("<%= j render partial: 'messages', locals: { messages: @todo.comments, project: @project, object: @todo} %>");
 $('.simditor-body').text('');

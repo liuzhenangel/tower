@@ -1,34 +1,31 @@
 nav.navbar.navbar-inverse
   .container
     .navigation_links
-      .navbar-header
-        button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to '', root_path, class: 'navbar-brand navbar-brand-logo'
-      .collapse.navbar-collapse
+      .collapse.navbar-collapse.navbar-collapse-new
         ul.nav.navbar-nav
           li class="dropdown"
             a id="dLabel" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"
-              | #{@team.name}
+              span.team_name #{@team.name}
               span class="caret"
             - teams = current_user.teams.where.not(id: @team.id)
-            ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+            ul class="dropdown-menu team-menu" role="menu" aria-labelledby="dLabel"
+              p.change_team_title
+                span 切换团队
               - teams.each do |team|
                 li
                   = link_to team.name, team_projects_path(team_id: team.id)
-              li
+              li.part-line
+              li.small
                 = link_to '创建/管理团队', root_path
-          li
+          li class="#{active_for(@projects.present?)}"
             = link_to '项目', team_projects_path(team_id: @team.id)
-          li
+
+          li class="#{active_for(@events.present?)}"
             = link_to '动态', team_events_path(team_id: @team.id)
         ul.nav.navbar-nav.navbar-right
           li class="dropdown"
             a id="dLabel" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false"
-              | #{current_user.name}
+              = image_tag current_user.logo_url, class: 'img-circle layout-user-img'
               span class="caret"
             ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
               li

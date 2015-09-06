@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   before_action :find_todo, only: [:edit, :update, :restore, :destroy, :open, :finish, :show]
 
   def index
-    @todos = @project.todos
+    @todolists = @project.todolists
   end
 
   def show

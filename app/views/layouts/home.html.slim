@@ -8,11 +8,12 @@ html
     == javascript_include_tag 'application', 'data-turbolinks-track' => true
     == csrf_meta_tags
   body
-    header
-      - if current_user.present?
-        == render 'layouts/navigation'
-      .container.simple-stack
-        .modal
-        .page
-          == yield
-    == render 'layouts/footer'
+    .wrapper
+      .topbar
+        .account-info
+          span.welcome hi, #{current_user.name}
+          = link_to '退出', destroy_user_session_path, :method=>'delete'
+      .page#page-launchpad
+        == yield
+
+      == render 'layouts/footer'

@@ -4,6 +4,18 @@ zh-CN:
       project_type:
         standard: 标准项目
         agility: 敏捷项目
+  activerecord:
+    attributes:
+      project:
+        name: 项目名称
+        description: 项目描述
+        project_type: 项目类型
+        user_ids: 项目成员
+      todo:
+        name: 任务名称
+        user_id: 将任务指派给
+        end_time: 任务截止时间
+
   date:
     abbr_day_names:
     - 周日

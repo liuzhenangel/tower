@@ -1,23 +1,33 @@
-.todos_list_wrapper.container
-  - todolists.each do |list|
-    h5 = list.name
-    table.table
-      tbody
-        - list.todos.opened.each do |todo|
-          tr
-            td = link_to todo.name, project_todo_path(project_id: project.id, id: todo.id)
-            td
-              - if todo.comments.present?
-                | #{todo.comments.size}条评论
-            td = todo.user.try(:name)
-            td
-              - if todo.end_time.present?
-                = time_ago_in_words todo.end_time
-            td
-              = link_to '完成', finish_project_todo_path(project_id: project.id, id: todo.id)
-              ||
-              = link_to '编辑', edit_project_todo_path(project_id: project.id, id: todo.id), remote: true
-              ||
-              = link_to '删除', project_todo_path(project_id: project.id, id: todo.id), method: 'DELETE', data: {confirm: "确认删除这条任务 #{todo.name} ?"}
+.todos_list_wrapper
+  .todolists
+    - todolists.each do |list|
+      .todolist
+        h4
+          span.name
+            = link_to list.name, project_todolist_path(project_id: project.id, id: list.id), target: '_blank'
+          span.label.comments-count
+        ul.todos.todos-uncompleted.ui-sortable
+          - list.todos.opened.each do |todo|
+            li.todo
+              .todo-wrap
+                span.todo-content
+                  = link_to todo.name, project_todo_path(project_id: project.id, id: todo.id)
+                span.todo-detail
+                  - if todo.comments.present?
+                    span.label.comments-count
+                      | #{todo.comments.size}条评论
+                  = link_to project_todo_path(project_id: project.id, id: todo.id), class: "label todo-assign-due #{is_delay(todo.end_time)}" do
+                    span.assignee
+                      = todo.user.try(:name)
+                    span.due
+                      - if todo.end_time.present?
+                        = todo.end_time.to_date
 
-    = link_to '添加新任务', new_project_todo_path(project_id: project.id, todolist_id: list.id), remote: true, class: "new_project_todo_#{list.id}"
+                  span.complate.label
+                    = link_to '完成', finish_project_todo_path(project_id: project.id, id: todo.id)
+                  span.edit.label
+                    = link_to '编辑', edit_project_todo_path(project_id: project.id, id: todo.id), remote: true
+                  span.destroy.label
+                    = link_to '删除', project_todo_path(project_id: project.id, id: todo.id), method: 'DELETE', data: {confirm: "确认删除这条任务 #{todo.name} ?"}
+
+      = link_to '添加新任务', new_project_todo_path(project_id: project.id, todolist_id: list.id), remote: true, class: "new_project_todo_#{list.id} create_todo"

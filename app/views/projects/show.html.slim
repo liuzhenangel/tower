@@ -1,3 +1,6 @@
-h3 = link_to '任务', project_todos_path(project_id: @project.id)
+.row
+  .col-md-1
+  .col-md-10
+    h3 = link_to '任务', project_todos_path(project_id: @project.id), class: 'todo-title'
 
-= render partial: 'todos/list', locals: { project: @project, todolists: @project.todolists }
+    = render partial: 'todos/list', locals: { project: @project, todolists: @project.todolists }
