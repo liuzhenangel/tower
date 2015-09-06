@@ -20,7 +20,10 @@
                         = @todo.end_time.to_date
 
                   span.complate.label
-                    = link_to '完成', finish_project_todo_path(project_id: @project.id, id: @todo.id)
+                    - if @todo.finished?
+                      = link_to '重新打开', open_project_todo_path(project_id: @project.id, id: @todo.id)
+                    - else
+                      = link_to '完成', finish_project_todo_path(project_id: @project.id, id: @todo.id)
                   span.edit.label
                     = link_to '编辑', edit_project_todo_path(project_id: @project.id, id: @todo.id), remote: true
                   span.destroy.label
