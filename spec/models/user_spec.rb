@@ -16,11 +16,13 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
-#  access_id              :integer
+#  logo                   :string
 #
 
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "正确创建用户" do
+    expect( create(:user) ).to be_truthy
+  end
 end

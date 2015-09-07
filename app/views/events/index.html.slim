@@ -1,5 +1,8 @@
 .team-events
   .team-events-wrapper
-    = render 'events_list'
+    = hidden_field_tag 'team_id', @team.id
+    = hidden_field_tag 'current_page', @events.current_page
+    = render partial: 'events_list', locals: { events: @events, team: @team }
 
-  = link_to '加载更多内容', '', id: 'btn-load-more'
+  - unless @events.last_page?
+    = link_to '加载更多内容', '', id: 'btn-load-more'

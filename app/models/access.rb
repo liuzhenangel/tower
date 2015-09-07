@@ -8,12 +8,14 @@
 #  updated_at    :datetime         not null
 #  resource_type :string
 #  resource_id   :integer
+#  project_id    :integer
 #
 
 class Access < ActiveRecord::Base
   RESERVED = [ 'admin' ]
-  has_many :user
+  has_and_belongs_to_many :users
   has_many :role_resources, dependent: :destroy
+  belongs_to :project
 
   validates :name, presence: true, uniqueness:  true
 

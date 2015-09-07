@@ -1,6 +1,19 @@
-$(".team-events-wrapper").append("<%= j render 'events_list' %>");
 $('#current_page').val(<%= @events.current_page%>);
 
-<% if @events.last_page? %>
-  $('#btn-load-more').text('没有更多内容了');
+<% select_by_date(@events).each do |event_arr| %>
+  <% if !generate_date_exist?(event_arr.first) %>
+    $(".team-events-wrapper").append("<%= j render partial: 'events_list', locals: {events: event_arr, team: @team } %>");
+
+  <% elsif !generate_project_exist?(event_arr.first) %>
+
+    $('.events-day-content').last().append("<%= j render partial: 'events_day_content', locals: { events: event_arr } %>");
+
+  <% else %>
+    $('.events-ancestor').last().append("<%= j render partial: 'event_common', locals: { events: event_arr } %>");
+
+  <% end %>
 <% end %>
+
+  <% if @events.last_page? %>
+    $('#btn-load-more').text('没有更多内容了');
+  <% end %>

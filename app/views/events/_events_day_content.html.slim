@@ -1,0 +1,11 @@
+.events-day-content
+  - select_by_project(events).each do |event_sub|
+    - generate_project(event_sub.last)
+    .events-ancestor
+      - object = event_sub.first.find_project
+      h5.events-ancestor-title
+        - if object.class.name == 'Project'
+          = link_to object.name, project_path(object), target: '_blank'
+        - elsif object.class.name == 'Team'
+          = link_to object.name, team_projects_path(team_id: object.id), target: '_blank'
+      = render partial: 'event_common', locals: { events: event_sub }

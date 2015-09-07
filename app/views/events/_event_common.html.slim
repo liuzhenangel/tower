@@ -1,0 +1,19 @@
+- events.each do |event|
+  .event.event-common.event-todo-add
+    = link_to edit_user_password_path, class: 'avatar-wrap' do
+      = image_tag event.user.logo_url, class: 'avatar img-circle'
+    .event-main
+      .event-head
+        = link_to format_date(event.created_at), '', class: 'event-created-at'
+        span.event-actor
+          = link_to event.user.name, edit_user_password_path, class: 'link-member', target: '_blank'
+        span.event-action
+          = event.action
+        span.event-object
+          - if event.resource_object_type == "Todo"
+            - todo = Todo.with_deleted.find(event.resource_object_id)
+            = link_to todo.name, project_todo_path(project_id: todo.todolist.project, id: todo.id), target: '_blank'
+          - else
+            = event.resource_object.name
+        span.event-content
+          == event.content

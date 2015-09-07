@@ -16,12 +16,14 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
-#  access_id              :integer
+#  logo                   :string
 #
 
 FactoryGirl.define do
   factory :user do
-    
+    name {Faker::Name.name}
+    email 'user@tower.com'
+    password '1' * 8
+    logo {Faker::Company.logo}
   end
-
 end

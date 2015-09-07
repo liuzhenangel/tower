@@ -16,7 +16,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
-#  access_id              :integer
+#  logo                   :string
 #
 
 require 'carrierwave/orm/activerecord'
@@ -27,21 +27,19 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :access
   has_many :events
   has_many :todos
   has_many :comments
 
   has_and_belongs_to_many :teams
   has_and_belongs_to_many :projects
+  has_and_belongs_to_many :accesses
 
-  validate do
-    errors.add(:teams, '至少有一个团队') if teams.size == 0
-  end
 
   def self.current
-    Thread.current[:user] || User.first
+    Thread.current[:user]
   end
+
   def self.current=(user)
     Thread.current[:user] = user
   end

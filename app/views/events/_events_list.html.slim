@@ -1,42 +1,6 @@
-- bak_create, back_project  = '', ''
-= hidden_field_tag 'team_id', @team.id
-= hidden_field_tag 'current_page', @events.current_page
-
-- @events.each do |event|
-  - if (bak_create != event.created_at.to_date) && (@events.current_page == 1)
-    - bak_create = event.created_at.to_date
-    .events-day.weekend data-absdate="#{event.created_at}"
-      h4.events-day-title
-        = format_short_date event.created_at
-
-  - object = event.find_project
-  - if back_project != object
-    - back_project = object
-    .events-day
-      .events-day-content
-        .events-ancestor
-          h5.events-ancestor-title
-            - if object.class.name == 'Project'
-              = link_to object.name, project_path(object), target: '_blank'
-            - elsif object.class.name == 'Team'
-              = link_to object.name, team_projects_path(team_id: object.id), target: '_blank'
-
-  .events-day-common
-    .event.event-common.event-todo-add
-      = link_to edit_user_password_path, class: 'avatar-wrap' do
-        = image_tag event.user.logo_url, class: 'avatar img-circle'
-      .event-main
-        .event-head
-          = link_to format_date(event.created_at), '', class: 'event-created-at'
-          span.event-actor
-            = link_to event.user.name, edit_user_password_path, class: 'link-member', target: '_blank'
-          span.event-action
-            = event.action
-          span.event-object
-            - if event.resource_object_type == "Todo"
-              - todo = Todo.with_deleted.find(event.resource_object_id)
-              = link_to todo.name, project_todo_path(project_id: todo.todolist.project, id: todo.id), target: '_blank'
-            - else
-              = event.resource_object.name
-          span.event-content
-            == event.content
+- select_by_date(events).each do |event_arr|
+  - generate_date(event_arr.last)
+  div class="events-day #{has_class_weekend?(event_arr.first, team)}" data-absdate="#{event_arr.first.created_at}"
+    h4.events-day-title
+      = format_short_date event_arr.first.created_at
+    = render partial: 'events_day_content', locals: { events: event_arr }

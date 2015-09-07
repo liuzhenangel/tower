@@ -8,6 +8,7 @@
 #  updated_at    :datetime         not null
 #  resource_type :string
 #  resource_id   :integer
+#  project_id    :integer
 #
 
 require 'rails_helper'

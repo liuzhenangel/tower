@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
 
   def find_project
     if self.resource_object_type == "Todo"
-      self.resource_object.todolist.project
+      Todo.with_deleted.find(self.resource_object_id).todolist.project
 
     elsif self.resource_object_type == 'Todolist'
       self.resource_object.project
