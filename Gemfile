@@ -17,6 +17,7 @@ gem 'slim-rails'
 gem 'simple_form'
 gem 'enumerize'
 gem 'aasm'
+gem 'rails-i18n'
 
 # soft destroy
 gem "paranoia", "~> 2.0"

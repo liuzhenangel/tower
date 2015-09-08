@@ -14,5 +14,12 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "正确创建一条project" do
+    team = create(:team)
+    project = build(:project, team_id: team.id)
+    expect( project.save ).to be_truthy
+
+    event = Event.where(resource_object: project).first
+    expect( event.action ).to eq('创建了项目')
+  end
 end

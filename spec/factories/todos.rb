@@ -16,8 +16,12 @@
 FactoryGirl.define do
   factory :todo do
     name "MyString"
-user_id 1
-end_time "2015-09-01 12:47:33"
+    user_id 1
+    end_time "2015-09-01 12:47:33"
   end
 
+  factory :todo1, class: Todo do
+    name "sssMyString"
+    end_time "2015-09-01 12:47:33"
+  end
 end

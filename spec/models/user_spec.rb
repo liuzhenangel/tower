@@ -25,4 +25,8 @@ RSpec.describe User, type: :model do
   it "正确创建用户" do
     expect( create(:user) ).to be_truthy
   end
+
+  it "has many events" do
+    expect( create(:user).events.count ).to eql(0)
+  end
 end

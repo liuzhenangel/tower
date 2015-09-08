@@ -14,8 +14,7 @@
 FactoryGirl.define do
   factory :project do
     name "MyString"
-description "MyText"
-project_type "MyString"
+    description "MyText"
+    project_type "standard"
   end
-
 end

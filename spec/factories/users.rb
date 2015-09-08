@@ -22,7 +22,14 @@
 FactoryGirl.define do
   factory :user do
     name {Faker::Name.name}
-    email 'user@tower.com'
+    email 'user@test.com'
+    password '1' * 8
+    logo {Faker::Company.logo}
+  end
+
+  factory :user_test, class: User do
+    name {Faker::Name.name}
+    email 'user2@test.com'
     password '1' * 8
     logo {Faker::Company.logo}
   end

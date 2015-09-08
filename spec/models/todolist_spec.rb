@@ -13,5 +13,7 @@
 require 'rails_helper'
 
 RSpec.describe Todolist, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "正确创建一条todolist" do
+    expect( create(:todolist) ).to be_truthy
+  end
 end
